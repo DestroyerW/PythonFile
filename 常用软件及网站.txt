@@ -10,6 +10,8 @@ motrix
 蓝灯 https://github.com/getlantern/download
 airtest
 ATX
+natapp
+https://natapp.cn
 chromedriver
 https://sites.google.com/a/chromium.org/chromedriver/home
 ScrapydWeb
