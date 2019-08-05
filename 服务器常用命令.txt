@@ -1,0 +1,81 @@
+﻿服务激活环境与重启
+killall -9 uwsgi
+source /data/env/pyweb/bin/activate
+cd /data/wwwroot/DemoAPI
+python3 manage.py runserver
+uwsgi -x mysite.xml
+uwsgi --ini mysite.ini
+cd /usr/local/nginx/sbin/
+./nginx -t
+./nginx
+./nginx -s reload
+
+screen -S web
+screen -ls
+screen -X -S web quit
+
+#screen -S a         ----创建一个叫“a”的进程（注意空格screen和-S和a之间都有空格）
+
+#crtl+a+d      ----保存进程
+
+#screen -r a      ----进入刚才创建的“a”进程
+
+#exit      ----退出进程
+
+screen -ls      ----查看当前所有的screen进程
+
+nmap localhost    #查看主机当前开放的端口
+nmap -p 1024-65535 localhost    #查看主机端口（1024-65535）中开放的端口
+nmap -PS 192.168.21.163        #探测目标主机开放的端口
+nmap -PS22,80,3306  192.168.21.163    #探测所列出的目标主机端口
+nmap -O 192.168.21.163    #探测目标主机操作系统类型
+nmap -A 192.168.21.163    #探测目标主机操作系统类型
+nmap --help  #更多nmap参数请查询帮助信息
+
+
+gunicorn 启动服务
+
+gunicorn -w 4 -b 0.0.0.0:80 main:app
+
+uvicorn 启动服务
+
+uvicorn --host=0.0.0.0 --port=80  --reload main:app 
+
+uvicorn --host=0.0.0.0 --port=80 --workers=4 main:app
+
+gunicorn+uvicorn启动服务
+
+gunicorn -w 4 -b 0.0.0.0:80 -k uvicorn.workers.UvicornWorker main:app
+
+
+# ubuntu开启端口
+
+firewall-cmd --permanent --zone=public --add-port=80/tcp
+firewall-cmd --reload
+
+iptables -A INPUT -p tcp -m state --state NEW -m tcp --dport 80 -j ACCEPT
+service iptables restart
+
+# 服务器重启后失效
+
+apt-get install iptables
+
+iptables -I INPUT -p tcp --dport 80 -j ACCEPT
+
+iptables-save
+
+# 持久化规则
+
+apt-get install iptables-persistent
+
+sudo netfilter-persistent save
+
+sudo netfilter-persistent reload
+
+# 创建数据库 中文问题
+
+CREATE DATABASE datablasename DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+查看端口服务
+
+netstat -lnp|grep 88
