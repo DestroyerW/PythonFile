@@ -1,0 +1,16 @@
+常用软件
+Termius
+百度网盘：
+http://pandownload.com/
+Jetbrains全家桶
+http://idea.lanyus.com/
+forpytest/A123456a
+motrix
+爱加速
+蓝灯 https://github.com/getlantern/download
+airtest
+ATX
+chromedriver
+https://sites.google.com/a/chromium.org/chromedriver/home
+ScrapydWeb
+https://github.com/my8100/files/blob/master/scrapydweb/README_CN.md
